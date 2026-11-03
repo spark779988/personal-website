@@ -3730,7 +3730,7 @@ window.DS_DATA = {
           "text": "错"
         }
       ],
-      "correctChoice": "错"
+      "correctChoice": "B"
     },
     {
       "score": 1,
@@ -3755,7 +3755,7 @@ window.DS_DATA = {
           "text": "错"
         }
       ],
-      "correctChoice": "对"
+      "correctChoice": "A"
     },
     {
       "score": 1,
@@ -3780,7 +3780,7 @@ window.DS_DATA = {
           "text": "错"
         }
       ],
-      "correctChoice": "对"
+      "correctChoice": "A"
     },
     {
       "score": 1,
@@ -3805,7 +3805,7 @@ window.DS_DATA = {
           "text": "错"
         }
       ],
-      "correctChoice": "对"
+      "correctChoice": "A"
     },
     {
       "score": 1,
@@ -3830,7 +3830,7 @@ window.DS_DATA = {
           "text": "错"
         }
       ],
-      "correctChoice": "错"
+      "correctChoice": "B"
     },
     {
       "score": 1,
@@ -3855,7 +3855,7 @@ window.DS_DATA = {
           "text": "错"
         }
       ],
-      "correctChoice": "对"
+      "correctChoice": "A"
     },
     {
       "score": 1,
@@ -3880,7 +3880,7 @@ window.DS_DATA = {
           "text": "错"
         }
       ],
-      "correctChoice": "错"
+      "correctChoice": "B"
     },
     {
       "score": 1,
@@ -3905,7 +3905,7 @@ window.DS_DATA = {
           "text": "错"
         }
       ],
-      "correctChoice": "对"
+      "correctChoice": "A"
     },
     {
       "score": 0,

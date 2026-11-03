@@ -770,6 +770,7 @@
       bucket === "correct" ? "正确" : bucket === "wrong" ? "答错" : "待自评";
     const statusClass =
       bucket === "correct" ? "is-correct" : bucket === "wrong" ? "is-wrong" : "is-manual";
+    const selfStatus = state.quiz.selfReview[q.id] || "";
     return `
       <article class="review-card ${statusClass}" id="review-${q.id}">
         <div class="review-card-head">
@@ -802,8 +803,8 @@
         ${
           q.kind === "code" || q.kind === "essay"
             ? `<div class="self-review">
-                <button type="button" class="button button-ghost button-small" data-self-review="mastered" data-id="${q.id}">已掌握</button>
-                <button type="button" class="button button-ghost button-small" data-self-review="redo" data-id="${q.id}">加入错题重做</button>
+                <button type="button" class="button ${selfStatus === "mastered" ? "button-primary" : "button-ghost"} button-small" data-self-review="mastered" data-id="${q.id}" aria-pressed="${selfStatus === "mastered"}">已掌握</button>
+                <button type="button" class="button ${selfStatus === "redo" ? "button-primary" : "button-ghost"} button-small" data-self-review="redo" data-id="${q.id}" aria-pressed="${selfStatus === "redo"}">加入错题重做</button>
               </div>`
             : ""
         }
