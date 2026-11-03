@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08111f">
+  <meta name="description" content="数据结构期中冲刺题库：章节均衡组卷、答案解析、标记练习与错题重做。">
+  <title>DS Arena · 数据结构期中冲刺</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b1324'/%3E%3Cpath d='M16 18h32v8H24v8h18v8H24v8h24' fill='none' stroke='%2375e6ff' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="aurora aurora-one" aria-hidden="true"></div>
+  <div class="aurora aurora-two" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <button class="brand" type="button" data-nav="home" aria-label="返回首页">
+      <span class="brand-symbol" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </span>
+      <span class="brand-copy">
+        <strong>DS ARENA</strong>
+        <small>数据结构期中冲刺</small>
+      </span>
+    </button>
+    <nav class="topnav" aria-label="主导航">
+      <button type="button" class="nav-link is-active" data-nav="home">主页</button>
+      <button type="button" class="nav-link" data-nav="library">题库</button>
+      <button type="button" class="nav-link" data-nav="marked">我的标记</button>
+    </nav>
+    <button class="mark-counter" type="button" data-nav="marked" aria-label="查看标记题目">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2L3 9.6l6.2-.9L12 3Z"/></svg>
+      <span id="markCounter">0</span>
+    </button>
+  </header>
+
+  <main id="app">
+    <section id="view-home" class="view is-active" aria-labelledby="homeTitle">
+      <div class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="pulse-dot"></span> FINAL SPRINT · 考前突击模式</div>
+          <h1 id="homeTitle">把每一步结构<br><span class="gradient-text">练成得分直觉。</span></h1>
+          <p class="hero-lead">选择题、填空题、代码题，一章都不落下。按章节均衡抽题，提交后立即复盘答案与知识点。</p>
+          <div class="hero-actions">
+            <button class="button button-primary" type="button" data-start="full">
+              <span>开始全真综合卷</span>
+              <span class="button-meta">33 题</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <button class="button button-ghost" type="button" data-start="objective">
+              <span>只做客观题</span>
+              <span class="button-meta">30 题</span>
+            </button>
+          </div>
+          <div class="hero-proof">
+            <div><strong id="totalQuestionCount">0</strong><span>总题量</span></div>
+            <div><strong id="objectiveCount">0</strong><span>客观题</span></div>
+            <div><strong>3</strong><span>章节均衡</span></div>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="orbit orbit-a"></div>
+          <div class="orbit orbit-b"></div>
+          <div class="orb-core">
+            <span class="orb-kicker">READY</span>
+            <strong>DS</strong>
+            <span class="orb-sub">ALGORITHM</span>
+          </div>
+          <span class="float-chip chip-one">O(1)</span>
+          <span class="float-chip chip-two">STACK</span>
+          <span class="float-chip chip-three">NEXT →</span>
+          <span class="float-chip chip-four">QUEUE</span>
+          <svg class="hero-grid" viewBox="0 0 460 460">
+            <defs>
+              <linearGradient id="gridLine" x1="0" x2="1">
+                <stop stop-color="#79ecff" stop-opacity="0"/>
+                <stop offset=".5" stop-color="#79ecff" stop-opacity=".34"/>
+                <stop offset="1" stop-color="#9d8cff" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M40 180h380M40 230h380M40 280h380M130 60v340M230 60v340M330 60v340" stroke="url(#gridLine)" fill="none"/>
+            <circle cx="230" cy="230" r="145" fill="none" stroke="#75e6ff" stroke-opacity=".12" stroke-dasharray="3 8"/>
+          </svg>
+        </div>
+      </div>
+
+      <section class="section-block bank-section" aria-labelledby="bankTitle">
+        <div class="section-heading">
+          <div>
+            <span class="section-index">01 / QUESTION BANKS</span>
+            <h2 id="bankTitle">按题库进入</h2>
+          </div>
+          <p>四份原始资料完整拆解，可浏览、标记重点，也可以只练自己的标记题。</p>
+        </div>
+        <div id="bankGrid" class="bank-grid"></div>
+        <div class="unit-strip">
+          <div class="unit-strip-copy">
+            <span class="section-index">CHAPTER CHECK</span>
+            <strong>章节单元检测</strong>
+            <small>只用本章客观题，适合考前逐章排雷。</small>
+          </div>
+          <div id="unitButtons" class="unit-buttons"></div>
+        </div>
+      </section>
+
+      <section class="section-block insight-section">
+        <div class="insight-card">
+          <div class="insight-icon">◎</div>
+          <div>
+            <span class="section-index">SMART MIX</span>
+            <h3>章节均衡组卷</h3>
+            <p>综合卷每题随机，但配额锁定。客观题覆盖三章；代码题在可用范围内按章节抽取，避免只刷某一章。</p>
+          </div>
+          <div class="quota-strip" aria-label="章节配额">
+            <span>第 1 章 <b>7 + 3 + 1</b></span>
+            <span>第 2 章 <b>7 + 3 + 1</b></span>
+            <span>第 3 章 <b>6 + 4 + 1</b></span>
+          </div>
+        </div>
+        <button class="marked-banner" type="button" data-start="marked">
+          <span class="marked-star">★</span>
+          <span>
+            <small>PERSONAL FOCUS</small>
+            <strong>练习我标记的题</strong>
+            <em id="markedSummary">还没有标记题目</em>
+          </span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </section>
+
+      <section class="feature-grid">
+        <article class="feature-card">
+          <span class="feature-icon">∷</span>
+          <h3>即刻判分</h3>
+          <p>选择与填空提交后立即判分，并逐题展示平台答案、知识点与解析。</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-icon">↺</span>
+          <h3>错题重做</h3>
+          <p>只重新抽取本次做错和待复盘的题，减少无效刷题时间。</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-icon">✦</span>
+          <h3>重点标记</h3>
+          <p>每道题都可标记为“重点”或“有疑惑”，随时开始专项练习。</p>
+        </article>
+      </section>
+    </section>
+
+    <section id="view-library" class="view" aria-labelledby="libraryTitle">
+      <div class="page-head">
+        <button class="back-link" type="button" data-nav="home">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+          返回主页
+        </button>
+        <div class="page-head-row">
+          <div>
+            <span class="section-index">QUESTION LIBRARY</span>
+            <h1 id="libraryTitle">题库</h1>
+          </div>
+          <button class="button button-primary button-small" id="startBankQuiz" type="button">练习当前题库</button>
+        </div>
+      </div>
+      <div class="library-toolbar">
+        <label class="search-box">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+          <input id="librarySearch" type="search" placeholder="搜索题干、知识点或题号">
+        </label>
+        <div id="bankTabs" class="segmented" aria-label="题库切换"></div>
+      </div>
+      <div class="library-filterbar">
+        <div id="typeFilters" class="filter-pills" aria-label="题型筛选"></div>
+        <button id="onlyMarkedFilter" class="filter-toggle" type="button" aria-pressed="false">
+          <span>★</span> 只看标记题
+        </button>
+      </div>
+      <div id="libraryMeta" class="library-meta"></div>
+      <div id="libraryList" class="library-list"></div>
+    </section>
+
+    <section id="view-quiz" class="view" aria-labelledby="quizTitle">
+      <div class="quiz-top">
+        <button class="back-link" type="button" data-action="exit-quiz">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+          退出
+        </button>
+        <div class="quiz-title-wrap">
+          <span class="section-index" id="quizEyebrow">RANDOM EXAM</span>
+          <h1 id="quizTitle">综合卷</h1>
+        </div>
+        <div class="quiz-progress-copy"><strong id="answeredCount">0</strong> / <span id="questionCount">0</span> 已作答</div>
+      </div>
+      <div class="quiz-progress-track"><span id="quizProgressBar"></span></div>
+
+      <div class="quiz-layout">
+        <section class="question-shell" id="questionShell" aria-live="polite">
+          <div class="question-toolbar">
+            <div class="question-badges">
+              <span class="type-badge" id="currentType">单选题</span>
+              <span class="chapter-badge" id="currentChapter">第 1 章</span>
+              <span class="source-badge" id="currentSource">第一章作业</span>
+            </div>
+            <div class="bookmark-actions" aria-label="题目标记">
+              <button class="mark-button" type="button" data-mark="important" aria-pressed="false">
+                <span>★</span> 重点
+              </button>
+              <button class="mark-button" type="button" data-mark="doubtful" aria-pressed="false">
+                <span>?</span> 有疑惑
+              </button>
+            </div>
+          </div>
+          <div class="question-index-line">
+            <span id="questionPosition">QUESTION 01</span>
+            <span id="questionScore">2 分</span>
+          </div>
+          <div id="questionBody" class="question-body"></div>
+          <div id="answerArea" class="answer-area"></div>
+          <div class="question-footer">
+            <button class="button button-ghost button-small" id="prevQuestion" type="button">上一题</button>
+            <button class="button button-primary button-small" id="nextQuestion" type="button">下一题</button>
+          </div>
+        </section>
+
+        <aside class="navigator">
+          <div class="navigator-head">
+            <div>
+              <span>答题卡</span>
+              <small>点击题号快速定位</small>
+            </div>
+            <strong id="navigatorRate">0%</strong>
+          </div>
+          <div id="questionPalette" class="question-palette"></div>
+          <div class="palette-legend">
+            <span><i class="dot dot-current"></i>当前</span>
+            <span><i class="dot dot-done"></i>已答</span>
+            <span><i class="dot dot-empty"></i>未答</span>
+          </div>
+          <button class="button button-submit" id="submitQuiz" type="button">提交答案，查看解析</button>
+          <p class="submit-note">提交前请检查未答题。代码题提交后展示参考作答，可自行标记“需重做”。</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="view-result" class="view" aria-labelledby="resultTitle">
+      <div class="result-hero">
+        <div class="score-orbit">
+          <div id="scoreRing" class="score-ring">
+            <div>
+              <strong id="scorePercent">0%</strong>
+              <span>目标正确率</span>
+            </div>
+          </div>
+        </div>
+        <div class="result-copy">
+          <span class="section-index">SESSION COMPLETE</span>
+          <h1 id="resultTitle">本轮复盘</h1>
+          <p id="resultMessage">答案已整理完毕，先看错题，再回补知识点。</p>
+          <div class="result-stats">
+            <div><strong id="correctStat">0</strong><span>答对</span></div>
+            <div><strong id="wrongStat">0</strong><span>待复盘</span></div>
+            <div><strong id="objectiveStat">0/0</strong><span>客观题</span></div>
+          </div>
+          <div class="result-actions">
+            <button class="button button-primary" type="button" data-action="retry-wrong">错题重做</button>
+            <button class="button button-ghost" type="button" data-start="full">再来一套</button>
+            <button class="button button-text" type="button" data-nav="home">返回主页</button>
+          </div>
+        </div>
+      </div>
+      <div class="review-head">
+        <div>
+          <span class="section-index">DETAILED REVIEW</span>
+          <h2>逐题解析</h2>
+        </div>
+        <div id="reviewFilters" class="filter-pills">
+          <button type="button" class="filter-pill is-active" data-review-filter="all">全部</button>
+          <button type="button" class="filter-pill" data-review-filter="wrong">只看错题</button>
+          <button type="button" class="filter-pill" data-review-filter="marked">只看标记</button>
+        </div>
+      </div>
+      <div id="reviewList" class="review-list"></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
